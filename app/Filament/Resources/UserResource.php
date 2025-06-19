@@ -4,6 +4,8 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
+use App\Filament\Resources\UserResource\RelationManagers\ProductsRelationManager;
+use App\Filament\Resources\UserResource\RelationManagers\SalesRelationManager;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -16,6 +18,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class UserResource extends Resource
 {
     protected static ?string $model = User::class;
+    protected static ?string $modelLabel = 'Proprietário';
 
     protected static ?string $navigationIcon = 'heroicon-c-users';
 
@@ -73,7 +76,8 @@ class UserResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            ProductsRelationManager::class,
+            SalesRelationManager::class
         ];
     }
 

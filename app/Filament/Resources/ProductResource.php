@@ -4,8 +4,10 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProductResource\Pages;
 use App\Filament\Resources\ProductResource\RelationManagers;
+use App\Filament\Resources\ProductResource\RelationManagers\UsersRelationManager;
 use App\Models\Product;
 use Filament\Forms;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -31,7 +33,12 @@ class ProductResource extends Resource
                 TextInput::make('name')
                 ->required(),
                 TextInput::make('value')
+                ->required(),
+                Select::make('user_id')
                 ->required()
+                ->label('Proprietário')
+                ->relationship("user","name")
+                ->searchable()
             ]);
     }
 
@@ -61,7 +68,7 @@ class ProductResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+          UsersRelationManager::class,  
         ];
     }
 
